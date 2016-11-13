@@ -12,7 +12,9 @@ abstract class AbstractRouter
 
     public function __construct($uri, $method, $request)
     {
-        $this->uri = preg_replace('{/$}', '', $uri);
+        $uri = explode('?', $uri, 2);
+        $this->uri = preg_replace('{/$}', '', $uri[0]);
+
         $this->method = $method;
         $this->request = $request;
     }

@@ -6,7 +6,11 @@ class ErrorController extends BasicController
 {
     public function notFound($request)
     {
-        echo 'Page not found';
+        $this->args = [
+            'message' => 'Page not found'
+        ];
+
+        $this->includeTemplate('error/index.php');
     }
 }
 

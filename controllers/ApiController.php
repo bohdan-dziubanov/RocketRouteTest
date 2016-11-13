@@ -7,6 +7,7 @@ class ApiController extends BasicController
     public function index($request)
     {
         $this->args = [
+            'title' => 'RocketRoute welcome page',
             'button' => 'submit',
             'placeholder' => 'ICAO',
             'text' => 'ICAO code'
@@ -17,7 +18,15 @@ class ApiController extends BasicController
 
     public function search($request)
     {
-        echo 'search';
+        $this->args = [
+            'title' => 'RocketRoute search',
+            'button' => 'submit',
+            'placeholder' => 'ICAO',
+            'text' => 'ICAO code',
+            'value' => isset($request['code']) ? $request['code'] : ''
+        ];
+
+        $this->includeTemplate('api/search.php');
     }
 }
 
