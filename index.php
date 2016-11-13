@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Index page of the project
  *
@@ -8,7 +7,9 @@
 
 error_reporting(E_ALL);
 
-spl_autoload_register(function ($className) {
+spl_autoload_register(function ($className)
+{
+    $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
     include $className . '.php';
 });
 

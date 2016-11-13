@@ -6,17 +6,19 @@ abstract class AbstractRouter
 {
     protected $uri;
     protected $method;
+    protected $request;
 
     protected $get = [];
     protected $post = [];
 
-    public function __construct($uri, $method)
+    public function __construct($uri, $method, $request)
     {
         $this->uri = preg_replace('{/$}', '', $uri);
         $this->method = $method;
+        $this->request = $request;
     }
 
-    abstract protected function addMethods();
+    abstract protected function initializeMethods();
 
     public function get($uri, $handler)
     {

@@ -1,11 +1,5 @@
 <?php
 
-spl_autoload_register(function ($className)
-{
-    $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
-    include $className . '.php';
-});
-
 use routing\Router;
 
 class Application
@@ -14,8 +8,9 @@ class Application
     {
         $uri = $_SERVER['REQUEST_URI'];
         $method = $_SERVER['REQUEST_METHOD'];
+        $request = $_REQUEST;
         
-        $router = new Router($uri, $method);
+        $router = new Router($uri, $method, $request);
 
         $router->execute();
     }
