@@ -2,7 +2,7 @@
 
 namespace controllers;
 
-class ErrorController
+class ErrorController extends BasicController
 {
     public function notFound($request)
     {

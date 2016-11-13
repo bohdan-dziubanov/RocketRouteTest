@@ -2,11 +2,17 @@
 
 namespace controllers;
 
-class ApiController
+class ApiController extends BasicController
 {
     public function index($request)
     {
-        echo 'index';
+        $this->args = [
+            'button' => 'submit',
+            'placeholder' => 'ICAO',
+            'text' => 'ICAO code'
+        ];
+
+        $this->includeTemplate('api/index.php');
     }
 
     public function search($request)

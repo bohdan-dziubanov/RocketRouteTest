@@ -8,8 +8,7 @@ abstract class AbstractRouter
     protected $method;
     protected $request;
 
-    protected $get = [];
-    protected $post = [];
+    protected $routs = [];
 
     public function __construct($uri, $method, $request)
     {
@@ -20,16 +19,10 @@ abstract class AbstractRouter
 
     abstract protected function initializeMethods();
 
-    public function get($uri, $handler)
+    public function addRoute($method, $uri, $handler)
     {
-        $hashKey = md5($uri . 'get');
-        $this->get[$hashKey] = ['uri' => $uri, 'handler' => $handler];
-    }
-
-    public function post($uri, $controller)
-    {
-        $hashKey = md5($uri . 'post');
-        $this->post[$hashKey] = ['uri' => $uri, 'handler' => $handler];
+        $hashKey = md5($uri . $method);
+        $this->routs[$hashKey] = $handler;
     }
 }
 

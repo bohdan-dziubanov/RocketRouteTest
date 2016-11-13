@@ -6,30 +6,21 @@ class Router extends AbstractRouter
 {
     protected function initializeMethods()
     {
-        $this->get('', 'ApiController@index');
-        $this->get('/search', 'ApiController@search');
-        $this->get('/notFound', 'ErrorController@notFound');
+        $this->addRoute('GET', '', 'ApiController@index');
+        $this->addRoute('GET', '/search', 'ApiController@search');
+        $this->addRoute('GET', '/notFound', 'ErrorController@notFound');
     }
 
     public function execute()
     {
         $this->initializeMethods();
 
-        if ($this->method === 'GET')
-        {
-            $hashKey = md5($this->uri . 'get');
-            $methodData = isset($this->get[$hashKey]) ? $this->get[$hashKey] : null;
-        }
-        else if ($this->method === 'POST')
-        {
-            $hashKey = md5($this->uri . 'post');
-            $methodData = isset($this->post[$hashKey]) ? $this->post[$hashKey] : null;
-        }
+        $hashKey = md5($this->uri . $this->method);
+        $methodData = isset($this->routs[$hashKey]) ? $this->routs[$hashKey] : null;
 
-        $methodData = !empty($methodData) ? $methodData : ['uri' => '/error',
-            'handler' => 'ErrorController@notFound'];
+        $methodData = !empty($methodData) ? $methodData : 'ErrorController@notFound';
 
-        $handler = explode('@', $methodData['handler']);
+        $handler = explode('@', $methodData);
 
         $className = 'controllers\\' . $handler[0];
         $controller = new $className;
