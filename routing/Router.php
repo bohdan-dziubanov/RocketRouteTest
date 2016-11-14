@@ -24,7 +24,8 @@ class Router extends AbstractRouter
 
         $className = 'controllers\\' . $handler[0];
         $controller = new $className;
-        $controller->$handler[1]($this->request);
+	$method = $handler[1];
+        $controller->$method($this->request);
     }
 }
 
