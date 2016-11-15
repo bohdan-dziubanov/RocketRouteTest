@@ -66,7 +66,7 @@ class ApiController extends BasicController {
     $responseArray = json_decode(json_encode($responseUsXml), TRUE);
 
     $coords = $this->__getCoord($responseArray['NOTAMSET']['NOTAM']['ItemQ']);
- var_dump($responseArray['NOTAMSET']);exit;
+ var_dump($responseArray['NOTAMSET']['NOTAM'][0]['ItemQ']);exit;
 //        $this->args = [
 //            'title' => 'RocketRoute search',
 //            'button' => 'submit',
