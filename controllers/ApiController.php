@@ -83,10 +83,10 @@ class ApiController extends BasicController {
         preg_match('/^.*\/(.*)$/', $dms, $params);
         $coords = $params[1];
 
-        $lat = $this->__DMStoDEC((int)substr($params, 0, 2), (int)substr($params, 2, 2));
-        $lat = substr($params, 4, 1) === 'N' ? $lat : -$lat;
-        $lng = $this->__DMStoDEC((int)substr($params, 5, 3), (int)substr($params, 8, 2));
-        $lng = substr($params, 10, 1) === 'E' ? $lng : -$lng;
+        $lat = $this->__DMStoDEC((int)substr($coords, 0, 2), (int)substr($coords, 2, 2));
+        $lat = substr($coords, 4, 1) === 'N' ? $lat : -$lat;
+        $lng = $this->__DMStoDEC((int)substr($coords, 5, 3), (int)substr($coords, 8, 2));
+        $lng = substr($coords, 10, 1) === 'E' ? $lng : -$lng;
 
         return ['lat' => $lat, 'lng' => $lng];
     }
