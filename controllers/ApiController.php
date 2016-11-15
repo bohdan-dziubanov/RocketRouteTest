@@ -67,7 +67,7 @@ class ApiController extends BasicController {
 
     $notams = [];
 
-    if (is_array($responseArray['NOTAMSET']['NOTAM']))
+    if (isset($responseArray['NOTAMSET']['NOTAM'][0]))
     {
         foreach ($responseArray['NOTAMSET']['NOTAM'] as $notam)
         {
