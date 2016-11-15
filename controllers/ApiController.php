@@ -23,9 +23,9 @@ class ApiController extends BasicController {
         $category = 'Free';
         $deviceId = 'bohdan.dziubanov@gmail.com';
         $curlUrl = 'https://flydev.rocketroute.com/remote/auth';
-var_dump($request);exit;
         $curl = curl_init();
 
+var_dump("asdasdsd");exit;
         curl_setopt_array($curl, [
             CURLOPT_URL => $curlUrl,
             CURLOPT_RETURNTRANSFER => true,
