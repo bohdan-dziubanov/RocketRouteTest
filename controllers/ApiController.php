@@ -59,38 +59,38 @@ class ApiController extends BasicController {
             . "<ICAO>{$request['code']}</ICAO>"
             . '</REQNOTAM>';
 
-    $client = new \SoapClient('https://apidev.rocketroute.com/notam/v1/service.wsdl');
+        $client = new \SoapClient('https://apidev.rocketroute.com/notam/v1/service.wsdl');
 
-    $response = $client->getNotam($request);
-    $responseUsXml = new \SimpleXMLElement($response);
-    $responseArray = json_decode(json_encode($responseUsXml), TRUE);
+        $response = $client->getNotam($request);
+        $responseUsXml = new \SimpleXMLElement($response);
+        $responseArray = json_decode(json_encode($responseUsXml), TRUE);
 
-    $notams = [];
+        $notams = [];
 
-    if (isset($responseArray['NOTAMSET']['NOTAM'][0]))
-    {
-        foreach ($responseArray['NOTAMSET']['NOTAM'] as $notam)
+        if (isset($responseArray['NOTAMSET']['NOTAM'][0]))
         {
-            $coords = $this->__getCoord($notam['ItemQ']);
-            $notams[] = ['coord' => $coords , 'hint' => isset($notam['ItemE']) ? $notam['ItemE'] : ''];
+            foreach ($responseArray['NOTAMSET']['NOTAM'] as $notam)
+            {
+                $coords = $this->__getCoord($notam['ItemQ']);
+                $notams[] = ['coord' => $coords , 'hint' => isset($notam['ItemE']) ? $notam['ItemE'] : ''];
+            }
         }
-    }
-    else
-    {
-        $coords = $this->__getCoord($responseArray['NOTAMSET']['NOTAM']['ItemQ']);
-        $notams[] = ['coord' => $coords , 'hint' => isset($responseArray['NOTAMSET']['NOTAM']['ItemE']) ? $responseArray['NOTAMSET']['NOTAM']['ItemE'] : ''];
-    }
+        else
+        {
+            $coords = $this->__getCoord($responseArray['NOTAMSET']['NOTAM']['ItemQ']);
+            $notams[] = ['coord' => $coords , 'hint' => isset($responseArray['NOTAMSET']['NOTAM']['ItemE']) ? $responseArray['NOTAMSET']['NOTAM']['ItemE'] : ''];
+        }
 
- var_dump($notams);exit;
-//        $this->args = [
-//            'title' => 'RocketRoute search',
-//            'button' => 'submit',
-//            'placeholder' => 'ICAO',
-//            'text' => 'ICAO code',
-//            'value' => isset($request['code']) ? $request['code'] : ''
-//        ];
-//
-//        $this->includeTemplate('api/search.php');
+        $this->args = [
+           'title' => 'RocketRoute search',
+           'button' => 'submit',
+           'placeholder' => 'ICAO',
+           'text' => 'ICAO code',
+           'value' => isset($request['code']) ? $request['code'] : '',
+           'notams' => json_encode($notams)
+        ];
+
+        $this->includeTemplate('api/search.php');
     }
 
     private function __getCoord($dms)
