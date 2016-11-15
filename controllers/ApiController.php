@@ -25,7 +25,6 @@ class ApiController extends BasicController {
         $curlUrl = 'https://flydev.rocketroute.com/remote/auth';
         $curl = curl_init();
 
-var_dump("asdasdsd");exit;
         curl_setopt_array($curl, [
             CURLOPT_URL => $curlUrl,
             CURLOPT_RETURNTRANSFER => true,
@@ -52,7 +51,7 @@ var_dump("asdasdsd");exit;
 
             $key = $resultAsArray['KEY'];
         }
-
+var_dump($key);exit;
         $request = '<?xml version="1.0" encoding="UTF-8" ?>'
             . '<REQNOTAM>'
             . "<USR>{$usr}</USR>"
