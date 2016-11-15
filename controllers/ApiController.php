@@ -63,7 +63,7 @@ class ApiController extends BasicController {
 
     $response = $client->getNotam($request);
     $responseUsXml = new \SimpleXMLElement($response);
-    $responseArray = json_decode(json_encode($resultUsXml), TRUE);
+    $responseArray = json_decode(json_encode($responseUsXml), TRUE);
 var_dump($responseArray);
 //        $this->args = [
 //            'title' => 'RocketRoute search',
