@@ -58,14 +58,9 @@ class ApiController extends BasicController {
             . "<PASSWD>3b239f8dd0a3ed058dde1792254144c8</PASSWD>"
             . "<ICAO>{$request['code']}</ICAO>"
             . '</REQNOTAM>';
-try{
+
     $client = new \SoapClient('https://apidev.rocketroute.com/notam/v1/service.wsdl');
-} catch (\Exception $e)
-{
-    var_dump($e);
-}
-   var_dump("Success");     
-exit;
+
         $response = $client->getNotam($request);
 var_dump($response);
 exit;
