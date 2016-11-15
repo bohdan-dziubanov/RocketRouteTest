@@ -51,7 +51,7 @@ class ApiController extends BasicController {
 
             $key = $resultAsArray['KEY'];
         }
-var_dump($key);exit;
+
         $request = '<?xml version="1.0" encoding="UTF-8" ?>'
             . '<REQNOTAM>'
             . "<USR>{$usr}</USR>"
@@ -60,6 +60,7 @@ var_dump($key);exit;
             . '</REQNOTAM>';
 
         $client = new \SoapClient('https://apidev.rocketroute.com/notam/v1/service.wsdl');
+var_dump($client);exit;
         $response = $client->getNotam($request);
 var_dump($response);
 exit;
