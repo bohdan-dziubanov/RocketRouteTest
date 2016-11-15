@@ -2,9 +2,12 @@
 
 namespace controllers;
 
+use soap\NOTAMSoap;
+
 class ApiController extends BasicController {
 
-    public function index($request) {
+    public function index($request)
+    {
         $this->args = [
             'title' => 'RocketRoute welcome page',
             'button' => 'submit',
@@ -17,69 +20,13 @@ class ApiController extends BasicController {
 
     public function search($request)
     {
-        $password = 'F8kPPaRbQZqjWTzzrbaR';
-        $md5Key = '4GnRqmDpNH3PHuPLmZLS';
-        $usr = 'bohdan.dziubanov@gmail.com';
-        $category = 'Free';
-        $deviceId = 'bohdan.dziubanov@gmail.com';
-        $curlUrl = 'https://flydev.rocketroute.com/remote/auth';
-        $curl = curl_init();
-
-        curl_setopt_array($curl, [
-            CURLOPT_URL => $curlUrl,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => "req=%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20%3F%3E%20%3CAUTH%3E%20%3CUSR%3E{$usr}%3C%2FUSR%3E%20%3CPASSWD%3E{$password}%3C%2FPASSWD%3E%20%3CDEVICEID%3E{$deviceId}%3C%2FDEVICEID%3E%20%3CPCATEGORY%3E{$category}%3C%2FPCATEGORY%3E%20%3CAPPMD5%3E{$md5Key}%3C%2FAPPMD5%3E%20%3C%2FAUTH%3E",
-            CURLOPT_HTTPHEADER => [
-                'content-type: application/x-www-form-urlencoded'
-            ],
-        ]);
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if ($err)
+        if(empty($request['code']))
         {
-            echo "cURL Error #:" . $err;
-        }
-        else
-        {
-            $resultUsXml = new \SimpleXMLElement($response);
-            $resultAsArray = json_decode(json_encode($resultUsXml), TRUE);
-
-            $key = $resultAsArray['KEY'];
+            throw new \Exception('ICAO code is required', 400);
         }
 
-        $requestSoap = '<?xml version="1.0" encoding="UTF-8" ?>'
-            . '<REQNOTAM>'
-            . "<USR>{$usr}</USR>"
-            . "<PASSWD>3b239f8dd0a3ed058dde1792254144c8</PASSWD>"
-            . "<ICAO>{$request['code']}</ICAO>"
-            . '</REQNOTAM>';
-
-        $client = new \SoapClient('https://apidev.rocketroute.com/notam/v1/service.wsdl');
-
-        $response = $client->getNotam($requestSoap);
-        $responseUsXml = new \SimpleXMLElement($response);
-        $responseArray = json_decode(json_encode($responseUsXml), TRUE);
-
-        $notams = [];
-
-        if (isset($responseArray['NOTAMSET']['NOTAM'][0]))
-        {
-            foreach ($responseArray['NOTAMSET']['NOTAM'] as $notam)
-            {
-                $coords = $this->__getCoord($notam['ItemQ']);
-                $notams[] = ['coord' => $coords , 'hint' => isset($notam['ItemE']) ? $notam['ItemE'] : ''];
-            }
-        }
-        else
-        {
-            $coords = $this->__getCoord($responseArray['NOTAMSET']['NOTAM']['ItemQ']);
-            $notams[] = ['coord' => $coords , 'hint' => isset($responseArray['NOTAMSET']['NOTAM']['ItemE']) ? $responseArray['NOTAMSET']['NOTAM']['ItemE'] : ''];
-        }
+        $soap = new NOTAMSoap($request['code']);
+        $notams = $soap->getResponse();
 
         $this->args = [
            'title' => 'RocketRoute search',
@@ -91,23 +38,5 @@ class ApiController extends BasicController {
         ];
 
         $this->includeTemplate('api/search.php');
-    }
-
-    private function __getCoord($dms)
-    {
-        preg_match('/^.*\/(.*)$/', $dms, $params);
-        $coords = $params[1];
-
-        $lat = $this->__DMStoDEC((int)substr($coords, 0, 2), (int)substr($coords, 2, 2));
-        $lat = substr($coords, 4, 1) === 'N' ? $lat : -$lat;
-        $lng = $this->__DMStoDEC((int)substr($coords, 5, 3), (int)substr($coords, 8, 2));
-        $lng = substr($coords, 10, 1) === 'E' ? $lng : -$lng;
-
-        return ['lat' => $lat, 'lng' => $lng];
-    }
-
-    private function __DMStoDEC($deg, $min)
-    {
-        return $deg+$min*60/3600;
     }
 }

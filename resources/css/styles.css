@@ -1,16 +1,16 @@
 html {
-  font-family: sans-serif; /* 1 */
-  -ms-text-size-adjust: 100%; /* 2 */
-  -webkit-text-size-adjust: 100%; /* 2 */
-  background-color: #1B1B1B;
+    font-family: sans-serif; /* 1 */
+    -ms-text-size-adjust: 100%; /* 2 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    background-color: #1B1B1B;
 }
 
 body {
-  background-color: #FAFAFA;
-  width: 800px;
-  margin: auto;
-  height: 100%;
-  min-height: 600px;
+    background-color: #FAFAFA;
+    width: 800px;
+    margin: auto;
+    height: 100%;
+    min-height: 600px;
 }
 
 body .header {
@@ -19,7 +19,7 @@ body .header {
 }
 
 body .container {
-  padding: 20px 30px;
+    padding: 20px 30px;
 }
 
 body .container form {
@@ -32,18 +32,18 @@ body .container form input.code {
 }
 
 body .container #map {
-  height: 500px;
-  width: 100%;
- }
- 
- body .container .error-message {
-    width: 150px;
+    height: 500px;
+    width: 100%;
+}
+
+body .container .error-message {
+    width: 200px;
     margin: auto;
     color: red;
     font-size: 16px;
     margin-top: 50px;
- }
+}
 
- body .container .notam-hidden-data {
+body .container .notam-hidden-data {
     display: none;
- }
+}
