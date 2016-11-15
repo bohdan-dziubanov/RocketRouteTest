@@ -1,12 +1,38 @@
-function initMap() {
-    var uluru = {lat: 51.4700, lng: -0.4564};
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 7,
-        center: uluru
+function addMarker(position, icon, map, value)
+{
+    var infowindow = new google.maps.InfoWindow({
+      content: value.hint
     });
 
     var marker = new google.maps.Marker({
-        position: uluru,
+        position: position,
+        icon: icon,
         map: map
+    });
+
+    marker.addListener('click', function() {
+        infowindow.open(map, marker);
+    });    
+}
+
+function initMap()
+{
+    var stringData = document.getElementById('notam-data');
+    var jsonData = JSON.parse(stringData.innerHTML);
+    var map;
+    var icon = 'resources/warning.png';
+
+    jsonData.forEach(function(value, index) {
+        var position = {lat: value.coord.lat, lng: value.coord.lng};
+        if(index == 0)
+        {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: position,
+                mapTypeId: 'roadmap'
+            });
+        }
+
+        addMarker(position, icon, map, value);
     });
 }

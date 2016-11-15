@@ -43,7 +43,7 @@ abstract class BaseSoap
                 throw new \Exception('Unauthorized', 401);
             }
 
-            $this->key = $resultAsArray['KEY'];
+            $this->token = $resultAsArray['KEY'];
         }
     }
 }
