@@ -61,11 +61,10 @@ class ApiController extends BasicController {
 
     $client = new \SoapClient('https://apidev.rocketroute.com/notam/v1/service.wsdl');
 
-        $response = $client->getNotam($request);
-var_dump($key);
-var_dump($response);
-exit;
-
+    $response = $client->getNotam($request);
+    $responseUsXml = new \SimpleXMLElement($response);
+    $responseArray = json_decode(json_encode($resultUsXml), TRUE);
+var_dump($responseArray);
 //        $this->args = [
 //            'title' => 'RocketRoute search',
 //            'button' => 'submit',
