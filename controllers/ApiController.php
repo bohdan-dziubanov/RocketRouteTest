@@ -65,8 +65,19 @@ class ApiController extends BasicController {
     $responseUsXml = new \SimpleXMLElement($response);
     $responseArray = json_decode(json_encode($responseUsXml), TRUE);
 
-    $coords = $this->__getCoord($responseArray['NOTAMSET']['NOTAM']['ItemQ']);
- var_dump($responseArray['NOTAMSET']['NOTAM'][0]['ItemQ']);exit;
+    $notams = [];
+    //$coords = $this->__getCoord($responseArray['NOTAMSET']['NOTAM']['ItemQ']);
+
+    if (is_array($responseArray['NOTAMSET']['NOTAM']))
+    {
+        foreach ($responseArray['NOTAMSET']['NOTAM'] as $notam)
+        {
+            $coords = $this->__getCoord($notam['ItemQ']);
+            $notams[] = ['coord' => $coords , 'hint' => isset($notam['ItemE']) ? $notam['ItemE'] : ''];
+        }
+    }
+
+ var_dump($notams);exit;
 //        $this->args = [
 //            'title' => 'RocketRoute search',
 //            'button' => 'submit',
