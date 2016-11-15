@@ -52,7 +52,7 @@ class ApiController extends BasicController {
             $key = $resultAsArray['KEY'];
         }
 
-        $request = '<?xml version="1.0" encoding="UTF-8" ?>'
+        $requestSoap = '<?xml version="1.0" encoding="UTF-8" ?>'
             . '<REQNOTAM>'
             . "<USR>{$usr}</USR>"
             . "<PASSWD>3b239f8dd0a3ed058dde1792254144c8</PASSWD>"
@@ -61,7 +61,7 @@ class ApiController extends BasicController {
 
         $client = new \SoapClient('https://apidev.rocketroute.com/notam/v1/service.wsdl');
 
-        $response = $client->getNotam($request);
+        $response = $client->getNotam($requestSoap);
         $responseUsXml = new \SimpleXMLElement($response);
         $responseArray = json_decode(json_encode($responseUsXml), TRUE);
 
