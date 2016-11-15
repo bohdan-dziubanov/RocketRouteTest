@@ -64,7 +64,9 @@ class ApiController extends BasicController {
     $response = $client->getNotam($request);
     $responseUsXml = new \SimpleXMLElement($response);
     $responseArray = json_decode(json_encode($responseUsXml), TRUE);
-var_dump($responseArray);
+
+    $coords = $this->__getCoord($responseArray['ItemQ']);
+    var_dump($coords);exit;
 //        $this->args = [
 //            'title' => 'RocketRoute search',
 //            'button' => 'submit',
@@ -76,4 +78,21 @@ var_dump($responseArray);
 //        $this->includeTemplate('api/search.php');
     }
 
+    private function __getCoord($dms)
+    {
+        preg_match('/^.*\/(.*)$/', $dms, $params);
+        $coords = $params[1];
+
+        $lat = $this->__DMStoDEC(substr($foo, 0, 2), substr($foo, 2, 2));
+        $lat = substr($foo, 4, 1) === 'N' ? $lat : -$lat;
+        $lng = $this->__DMStoDEC(substr($foo, 5, 3), substr($foo, 8, 2));
+        $lng = substr($foo, 10, 1) === 'E' ? $lng : -$lng;
+
+        return ['lat' => $lat, 'lng' => $lng];
+    }
+
+    private function __DMStoDEC($deg, $min)
+    {
+        return $deg+$min*60/3600;
+    }
 }
