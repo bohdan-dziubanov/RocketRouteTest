@@ -86,7 +86,7 @@ class ApiController extends BasicController {
            'button' => 'submit',
            'placeholder' => 'ICAO',
            'text' => 'ICAO code',
-           'value' => isset($request['code']) ? $request['code'] : '',
+           'code' => isset($request['code']) ? $request['code'] : '',
            'notams' => json_encode($notams)
         ];
 
