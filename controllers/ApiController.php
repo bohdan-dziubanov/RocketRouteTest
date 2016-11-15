@@ -64,7 +64,7 @@ try{
 {
     var_dump($e);
 }
-        
+   var_dump("Success");     
 exit;
         $response = $client->getNotam($request);
 var_dump($response);
