@@ -67,7 +67,6 @@ class ApiController extends BasicController {
 
     $coords = $this->__getCoord($responseArray['NOTAMSET']['NOTAM']['ItemQ']);
 
-    var_dump($coords);exit;
 //        $this->args = [
 //            'title' => 'RocketRoute search',
 //            'button' => 'submit',
@@ -83,7 +82,7 @@ class ApiController extends BasicController {
     {
         preg_match('/^.*\/(.*)$/', $dms, $params);
         $coords = $params[1];
-
+    var_dump($params);exit;
         $lat = $this->__DMStoDEC(substr($foo, 0, 2), substr($foo, 2, 2));
         $lat = substr($foo, 4, 1) === 'N' ? $lat : -$lat;
         $lng = $this->__DMStoDEC(substr($foo, 5, 3), substr($foo, 8, 2));
