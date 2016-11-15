@@ -55,8 +55,8 @@ class ApiController extends BasicController {
         $request = '<?xml version="1.0" encoding="UTF-8" ?>'
             . '<REQNOTAM>'
             . "<USR>{$usr}</USR>"
-            . "<PASSWD>{$key}</PASSWD>"
-            . "<ICAO>EGLL</ICAO>"
+            . "<PASSWD>3b239f8dd0a3ed058dde1792254144c8</PASSWD>"
+            . "<ICAO>{$request['code']}</ICAO>"
             . '</REQNOTAM>';
 
         $client = new \SoapClient('https://apidev.rocketroute.com/notam/v1/service.wsdl');
