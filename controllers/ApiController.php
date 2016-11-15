@@ -67,7 +67,7 @@ class ApiController extends BasicController {
 
     $coords = $this->__getCoord($responseArray['ItemQ']);
 
-    var_dump($responseArray['ItemQ']);exit;
+    print_r($responseArray);exit;
 //        $this->args = [
 //            'title' => 'RocketRoute search',
 //            'button' => 'submit',
