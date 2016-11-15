@@ -66,7 +66,6 @@ class ApiController extends BasicController {
     $responseArray = json_decode(json_encode($responseUsXml), TRUE);
 
     $notams = [];
-    //$coords = $this->__getCoord($responseArray['NOTAMSET']['NOTAM']['ItemQ']);
 
     if (is_array($responseArray['NOTAMSET']['NOTAM']))
     {
@@ -75,6 +74,11 @@ class ApiController extends BasicController {
             $coords = $this->__getCoord($notam['ItemQ']);
             $notams[] = ['coord' => $coords , 'hint' => isset($notam['ItemE']) ? $notam['ItemE'] : ''];
         }
+    }
+    else
+    {
+        $coords = $this->__getCoord($responseArray['NOTAMSET']['NOTAM']['ItemQ']);
+        $notams[] = ['coord' => $coords , 'hint' => isset($responseArray['NOTAMSET']['NOTAM']['ItemE']) ? $responseArray['NOTAMSET']['NOTAM']['ItemE'] : ''];
     }
 
  var_dump($notams);exit;
