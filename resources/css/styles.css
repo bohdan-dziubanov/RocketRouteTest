@@ -43,3 +43,7 @@ body .container #map {
     font-size: 16px;
     margin-top: 50px;
  }
+
+ bode .container .notam-hidden-data{
+    display: none;
+ }
