@@ -80,7 +80,7 @@ class ApiController extends BasicController {
             $coords = $this->__getCoord($responseArray['NOTAMSET']['NOTAM']['ItemQ']);
             $notams[] = ['coord' => $coords , 'hint' => isset($responseArray['NOTAMSET']['NOTAM']['ItemE']) ? $responseArray['NOTAMSET']['NOTAM']['ItemE'] : ''];
         }
-
+var_dump($request);exit;
         $this->args = [
            'title' => 'RocketRoute search',
            'button' => 'submit',
