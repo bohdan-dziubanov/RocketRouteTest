@@ -13,14 +13,7 @@ abstract class BaseSoap
     public function auth($category, $deviceId)
     {
         $curl = curl_init();
-        $req = "req=<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
-            . "<AUTH>"
-            . "<USR>{$this->usr}</USR>"
-            . "<PASSWD>{$this->pass}</PASSWD>"
-            . "<DEVICEID>{$deviceId}</DEVICEID>"
-            . "<PCATEGORY>{$category}</PCATEGORY>"
-            . "<APPMD5>{$this->md5key}</APPMD5>"
-            . "</AUTH>";
+        $req = "req=%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20%3F%3E%20%3CAUTH%3E%20%3CUSR%3Ebohdan.dziubanov%40gmail.com%3C%2FUSR%3E%20%3CPASSWD%3EF8kPPaRbQZqjWTzzrbaR%3C%2FPASSWD%3E%20%3CDEVICEID%3E1299f2aa8935b9ffabcd4a2cbcd16b8d45691629%3C%2FDEVICEID%3E%20%3CPCATEGORY%3ERocketRoute%3C%2FPCATEGORY%3E%20%3CAPPMD5%3E4GnRqmDpNH3PHuPLmZLS%3C%2FAPPMD5%3E%20%3C%2FAUTH%3E";
 
         curl_setopt_array($curl, [
             CURLOPT_URL => $this->authUrl,
