@@ -28,7 +28,7 @@ class NOTAMSoap extends BaseSoap
         $response = $client->getNotam($requestSoap);
         $responseUsXml = new \SimpleXMLElement($response);
         $responseArray = json_decode(json_encode($responseUsXml), TRUE);
-
+var_dump($requestSoap);var_dump($responseArray);exit;
         if (isset($responseArray['NOTAMSET']['NOTAM'][0]))
         {
             foreach ($responseArray['NOTAMSET']['NOTAM'] as $notam)
