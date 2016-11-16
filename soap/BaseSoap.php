@@ -6,7 +6,7 @@ abstract class BaseSoap
 {
     protected $usr = 'bohdan.dziubanov@gmail.com';
     protected $pass = '3b239f8dd0a3ed058dde1792254144c8';
-    protected $md5key = '4GnRqmDpNH3PHuPLmZLS ';
+    protected $md5key = '4GnRqmDpNH3PHuPLmZLS';
     protected $authUrl = 'https://flydev.rocketroute.com/remote/auth';
     protected $token;
 
