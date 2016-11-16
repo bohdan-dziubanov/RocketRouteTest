@@ -13,7 +13,7 @@ abstract class BaseSoap
     public function auth($category, $deviceId)
     {
         $curl = curl_init();
-        $req = 'req:<?xml version="1.0" encoding="UTF-8" ?>'
+        $req = 'req=<?xml version="1.0" encoding="UTF-8" ?>'
             . '<AUTH>'
             . "<USR>{$this->usr}</USR>"
             . "<PASSWD>{$this->pass}</PASSWD>"
@@ -45,7 +45,7 @@ abstract class BaseSoap
         {
             $resultUsXml = new \SimpleXMLElement($response);
             $resultAsArray = json_decode(json_encode($resultUsXml), TRUE);
-var_dump(htmlspecialchars($req));exit;
+var_dump($resultAsArray);exit;
             if (empty($resultAsArray['KEY']))
             {
                 throw new \Exception('Unauthorized', 401);
