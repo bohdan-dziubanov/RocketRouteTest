@@ -19,10 +19,10 @@ class NOTAMSoap extends BaseSoap
         $requestSoap = '<?xml version="1.0" encoding="UTF-8" ?>'
             . '<REQNOTAM>'
             . "<USR>{$this->usr}</USR>"
-            . "<PASSWD>3b239f8dd0a3ed058dde1792254144c8</PASSWD>"
+            . "<PASSWD>{$this->token}</PASSWD>"
             . "<ICAO>{$this->ICAOCode}</ICAO>"
             . '</REQNOTAM>';
-var_dump($this->token);exit;
+
         $client = new \SoapClient('https://apidev.rocketroute.com/notam/v1/service.wsdl');
 
         $response = $client->getNotam($requestSoap);
