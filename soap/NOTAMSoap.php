@@ -19,7 +19,7 @@ class NOTAMSoap extends BaseSoap
         $requestSoap = '<?xml version="1.0" encoding="UTF-8" ?>'
             . '<REQNOTAM>'
             . "<USR>{$this->usr}</USR>"
-            . "<PASSWD>{$this->token}</PASSWD>"
+            . "<PASSWD>3b239f8dd0a3ed058dde1792254144c8</PASSWD>"
             . "<ICAO>{$this->ICAOCode}</ICAO>"
             . '</REQNOTAM>';
 
@@ -28,7 +28,7 @@ class NOTAMSoap extends BaseSoap
         $response = $client->getNotam($requestSoap);
         $responseUsXml = new \SimpleXMLElement($response);
         $responseArray = json_decode(json_encode($responseUsXml), TRUE);
-var_dump($requestSoap);var_dump($responseArray);exit;
+
         if (isset($responseArray['NOTAMSET']['NOTAM'][0]))
         {
             foreach ($responseArray['NOTAMSET']['NOTAM'] as $notam)
