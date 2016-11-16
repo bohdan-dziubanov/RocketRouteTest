@@ -37,12 +37,12 @@ abstract class BaseSoap
         {
             $resultUsXml = new \SimpleXMLElement($response);
             $resultAsArray = json_decode(json_encode($resultUsXml), TRUE);
-
+var_dump($resultAsArray);exit;//681cb0493afd63628a15b88340222f2e
             if (empty($resultAsArray['KEY']))
             {
                 throw new \Exception('Unauthorized', 401);
             }
-var_dump($resultAsArray);exit;//681cb0493afd63628a15b88340222f2e
+
             $this->token = $resultAsArray['KEY'];
         }
     }
