@@ -10,7 +10,7 @@ abstract class BaseSoap
     protected $authUrl = 'https://flydev.rocketroute.com/remote/auth';
     protected $token;
 
-    public function auth($category, $deviceId, $curlUrl)
+    public function auth($category, $deviceId)
     {
         $curl = curl_init();
         $req = '<?xml version="1.0" encoding="UTF-8" ?>'
@@ -28,7 +28,6 @@ abstract class BaseSoap
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => htmlspecialchars($req),
             CURLOPT_HTTPHEADER => [
-                'cache-control: no-cache',
                 'content-type: application/x-www-form-urlencoded'
             ],
         ]);
