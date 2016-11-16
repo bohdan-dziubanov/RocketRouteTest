@@ -18,8 +18,9 @@ abstract class BaseSoap
             CURLOPT_URL => $curlUrl,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => "req=%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20%3F%3E%20%3CAUTH%3E%20%3CUSR%3E{$this->usr}%3C%2FUSR%3E%20%3CPASSWD%3E{$this->password}%3C%2FPASSWD%3E%20%3CDEVICEID%3E{$deviceId}%3C%2FDEVICEID%3E%20%3CPCATEGORY%3E{$category}%3C%2FPCATEGORY%3E%20%3CAPPMD5%3E{$this->md5Key}%3C%2FAPPMD5%3E%20%3C%2FAUTH%3E",
+            CURLOPT_POSTFIELDS => "req=%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20%3F%3E%20%3CAUTH%3E%20%3CUSR%3Ebohdan.dziubanov%40gmail.com%3C%2FUSR%3E%20%3CPASSWD%3EF8kPPaRbQZqjWTzzrbaR%3C%2FPASSWD%3E%20%3CDEVICEID%3E1299f2aa8935b9ffabcd4a2cbcd16b8d45691629%3C%2FDEVICEID%3E%20%3CPCATEGORY%3ERocketRoute%3C%2FPCATEGORY%3E%20%3CAPPMD5%3E4GnRqmDpNH3PHuPLmZLS%3C%2FAPPMD5%3E%20%3C%2FAUTH%3E",
             CURLOPT_HTTPHEADER => [
+                'cache-control: no-cache',
                 'content-type: application/x-www-form-urlencoded'
             ],
         ]);
