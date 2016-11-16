@@ -45,7 +45,7 @@ abstract class BaseSoap
         {
             $resultUsXml = new \SimpleXMLElement($response);
             $resultAsArray = json_decode(json_encode($resultUsXml), TRUE);
-var_dump(htmlspecialchars($req));exit;
+var_dump(htmlspecialchars($req, ENT_XML1));exit;
             if (empty($resultAsArray['KEY']))
             {
                 throw new \Exception('Unauthorized', 401);
