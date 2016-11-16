@@ -5,8 +5,8 @@ namespace soap;
 abstract class BaseSoap
 {
     protected $usr = 'bohdan.dziubanov@gmail.com';
-    protected $pass = 'F8kPPaRbQZqjWTzzrbaR';
-    protected $md5key = '4GnRqmDpNH3PHuPLmZLS';
+    protected $pass = '3b239f8dd0a3ed058dde1792254144c8';
+    protected $md5key = '4GnRqmDpNH3PHuPLmZLS ';
     protected $authUrl = 'https://flydev.rocketroute.com/remote/auth';
     protected $token;
 
@@ -42,7 +42,7 @@ abstract class BaseSoap
             {
                 throw new \Exception('Unauthorized', 401);
             }
-
+var_dump($resultAsArray);exit;//681cb0493afd63628a15b88340222f2e
             $this->token = $resultAsArray['KEY'];
         }
     }
