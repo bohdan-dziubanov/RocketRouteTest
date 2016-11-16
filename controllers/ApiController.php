@@ -26,6 +26,11 @@ class ApiController extends BasicController {
         }
 
         $soap = new NOTAMSoap($request['code']);
+        $category = 'RocketRoute';
+        $deviceId = 'e138231a68ad82f054e3d756c6634ba1';
+        $curlUrl = 'https://flydev.rocketroute.com/remote/auth';
+
+        $soap->auth($category, $deviceId, $curlUrl);
         $notams = $soap->getResponse();
 
         $this->args = [
