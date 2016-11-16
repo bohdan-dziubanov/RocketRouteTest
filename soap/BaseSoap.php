@@ -26,7 +26,7 @@ abstract class BaseSoap
             CURLOPT_URL => $this->authUrl,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => quotemeta($req),
+            CURLOPT_POSTFIELDS => htmlspecialchars($req),
             CURLOPT_HTTPHEADER => [
                 'content-type: application/x-www-form-urlencoded'
             ],
