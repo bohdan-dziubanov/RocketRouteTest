@@ -4,7 +4,7 @@ namespace controllers;
 
 trait GeoTrait
 {
-    private function __getCoord($dms)
+    public function __getCoord($dms)
     {
         preg_match('/^.*\/(.*)$/', $dms, $params);
         $coords = $params[1];
@@ -17,7 +17,7 @@ trait GeoTrait
         return ['lat' => $lat, 'lng' => $lng];
     }
 
-    private function __DMStoDEC($deg, $min)
+    public function __DMStoDEC($deg, $min)
     {
         return $deg + $min * 60 / 3600;
     }
