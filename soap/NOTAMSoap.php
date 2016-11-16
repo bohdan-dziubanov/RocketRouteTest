@@ -19,7 +19,7 @@ class NOTAMSoap extends BaseSoap
         $requestSoap = '<?xml version="1.0" encoding="UTF-8" ?>'
             . '<REQNOTAM>'
             . "<USR>{$this->usr}</USR>"
-            . "<PASSWD>{$this->token}</PASSWD>"
+            . "<PASSWD>527131c170ed0a38148002ccb0b8fa25</PASSWD>"
             . "<ICAO>{$this->ICAOCode}</ICAO>"
             . '</REQNOTAM>';
 
