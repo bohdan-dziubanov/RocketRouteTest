@@ -26,7 +26,7 @@ abstract class BaseSoap
             CURLOPT_URL => $this->authUrl,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $req,
+            CURLOPT_POSTFIELDS => quotemeta($req),
             CURLOPT_HTTPHEADER => [
                 'content-type: application/x-www-form-urlencoded'
             ],
@@ -45,7 +45,7 @@ abstract class BaseSoap
         {
             $resultUsXml = new \SimpleXMLElement($response);
             $resultAsArray = json_decode(json_encode($resultUsXml), TRUE);
-var_dump(htmlspecialchars($req, ENT_XML1));exit;
+var_dump($resultAsArray);exit;
             if (empty($resultAsArray['KEY']))
             {
                 throw new \Exception('Unauthorized', 401);
