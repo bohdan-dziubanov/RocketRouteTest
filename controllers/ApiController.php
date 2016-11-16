@@ -25,11 +25,11 @@ class ApiController extends BasicController {
             throw new \Exception('ICAO code is required', 400);
         }
 
-        $soap = new NOTAMSoap($request['code']);
         $category = 'RocketRoute';
         $deviceId = 'e138231a68ad82f054e3d756c6634ba1';
         $curlUrl = 'https://flydev.rocketroute.com/remote/auth';
 
+        $soap = new NOTAMSoap($request['code']);
         $soap->auth($category, $deviceId, $curlUrl);
         $notams = $soap->getResponse();
 
